@@ -51,7 +51,7 @@ app.patch("/todo/:id", async(req, res) => {
         const { id } = req.params;
         const { desc } = req.body;
         const todo = await pool.query("UPDATE todo SET description=$1 WHERE todo_id=$2", [desc, id])
-        res.status(204).json({message :"Updated Successfully"});
+        res.status(204);
     } catch (error) {
         console.log(error);
     }
