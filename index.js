@@ -36,6 +36,16 @@ app.get("/", async(req, res) => {
     }
 });
 
+app.get("/todo/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        const todo = await pool.query("SELECT * FROM todo WHERE todo_id=$1", [id])
+        res.status(200).json(todo.rows);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.listen(port, () => {
     console.log("App is running at port: " + port);
 })
