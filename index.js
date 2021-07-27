@@ -23,7 +23,16 @@ app.post("/todo", async(req, res) => {
         const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", [description]);
         res.status(201).json(newTodo);
     } catch (error) {
-        res.json(error);
+        console.log(error);
+    }
+});
+
+app.get("/", async(req, res) => {
+    try {
+        const allTodos = await pool.query("SELECT * FROM todo");
+        res.status(200).json(allTodos.rows);
+    } catch (error) {
+        console.log(error);
     }
 });
 
