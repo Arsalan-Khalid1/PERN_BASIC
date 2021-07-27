@@ -11,6 +11,22 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
+
+//routes
+
+
+//controller
+
+app.post("/todo", async(req, res) => {
+    try {
+        const { description } = req.body;
+        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1)", [description]);
+        res.status(201).json(newTodo);
+    } catch (error) {
+        res.json(error);
+    }
+});
+
 app.listen(port, () => {
     console.log("App is running at port: " + port);
 })
