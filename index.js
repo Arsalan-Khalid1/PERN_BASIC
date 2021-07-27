@@ -20,7 +20,7 @@ app.use(express.json());
 app.post("/todo", async(req, res) => {
     try {
         const { description } = req.body;
-        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1)", [description]);
+        const newTodo = await pool.query("INSERT INTO todo (description) VALUES($1) RETURNING *", [description]);
         res.status(201).json(newTodo);
     } catch (error) {
         res.json(error);
