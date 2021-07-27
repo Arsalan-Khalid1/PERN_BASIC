@@ -57,6 +57,18 @@ app.patch("/todo/:id", async(req, res) => {
     }
 });
 
+app.delete("/todo/:id", async(req, res) => {
+    try {
+        const { id } = req.params;
+        const todo = await pool.query("DELETE FROM todo WHERE todo_id=$1", [id])
+        res.json("Record Deleted!!!!");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
 app.listen(port, () => {
     console.log("App is running at port: " + port);
 })
