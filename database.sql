@@ -1,0 +1,6 @@
+CREATE DATABASE PERN_BASIC;
+
+CREATE TABLE todo (
+    todo_id SERIAL PRIMARY KEY,
+    description VARCHAR(255)
+);
